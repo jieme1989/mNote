@@ -298,10 +298,12 @@ docker pull docker.m.daocloud.io/library/consul:1.15.1
 ```shell
 docker run -d --restart=always -p 8500:8500 -v /data/consul:/consul/data -e CONSUL_BIND_INTERFACE='eth0' --name=consul1.15.1 docker.m.daocloud.io/library/consul:1.15.1 agent -server -bootstrap -ui -client='0.0.0.0'
 
-
+#默认启动
 docker run -d --restart=always -p 8500:8500 -v /data/consul:/consul/data -e CONSUL_BIND_INTERFACE='eth0' --name=consul hashicorp/consul:latest agent -server -bootstrap -ui -client='0.0.0.0' 
 
 
+#宿主启动
+docker run -d --restart=always --network=host -v /data/consul:/consul/data -e CONSUL_BIND_INTERFACE='eth0' -e CONSUL_CLIENT_INTERFACE='eth0' --name=consul hashicorp/consul:latest agent -server -bootstrap -ui -client='0.0.0.0' 
 ```
 ## consul参数详解
 
